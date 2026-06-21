@@ -1,0 +1,16 @@
+# Node
+node_modules/
+.pnpm-store/
+# Env
+.env
+.env.local
+.env.*.local
+# Astro
+.astro/
+dist/
+# Editor
+.vscode/
+.idea/
+# OS
+.DS_Store
+Thumbs.db
