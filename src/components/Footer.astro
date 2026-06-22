@@ -1,0 +1,99 @@
+---
+/*
+ * janaushdhi-app Footer — public-health price-intelligence surface.
+ *
+ * Signature element: a saturated medical-cross divider above the
+ * disclaimer reminder — the one bold detail. Everything else stays
+ * clinical-quiet, IBM Plex Sans, no embellishment.
+ * Browse / Find substitute / Disclaimer reminder + LegalFooter.
+ *
+ * Palette: bone-white #FAFAF9 / medical-green #0F766E / alert amber.
+ */
+import LegalFooter from '@chirag127/astro-chrome/legal/LegalFooter.astro'
+---
+<footer class="jn-footer" role="contentinfo">
+  <div class="jn-grid">
+    <div class="jn-col">
+      <h3 class="jn-h">Browse medicines</h3>
+      <ul>
+        <li><a href="/browse/">All medicines</a></li>
+        <li><a href="/browse/?cat=analgesic">Analgesics</a></li>
+        <li><a href="/browse/?cat=antibiotic">Antibiotics</a></li>
+        <li><a href="/browse/?cat=cardiovascular">Cardiovascular</a></li>
+        <li><a href="/browse/?cat=diabetes">Diabetes</a></li>
+      </ul>
+    </div>
+    <div class="jn-col">
+      <h3 class="jn-h">Tools</h3>
+      <ul>
+        <li><a href="/find-substitute/">Find substitute</a></li>
+        <li><a href="/savings/">Savings calculator</a></li>
+        <li><a href="/stores/">Find a Kendra</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="jn-col">
+      <h3 class="jn-h">Government sources</h3>
+      <ul>
+        <li><a href="https://www.janaushadhi.gov.in/" rel="noopener external">janaushadhi.gov.in</a></li>
+        <li><a href="https://pmbjp.gov.in/" rel="noopener external">PMBJP scheme</a></li>
+        <li><a href="https://www.india.gov.in/" rel="noopener external">india.gov.in</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="jn-disclaimer">
+    <span class="jn-cross" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="22" height="22" rx="5" fill="#0F766E" />
+        <path d="M11 5.5v11M5.5 11h11" stroke="#fff" stroke-width="2.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <p>
+      <strong>Disclaimer.</strong> This site is informational. <strong>Not medical advice.</strong>
+      Prices scraped from janaushadhi.gov.in and may lag by 24h. Always consult a registered pharmacist
+      or doctor before substituting any medication. <a href="/disclaimer/">Read the full disclaimer.</a>
+    </p>
+  </div>
+  <LegalFooter
+    appName="Oriz Janaushdhi"
+    bio="Free price intelligence for Pradhan Mantri Jan Aushadhi medicines. No ads."
+  />
+</footer>
+<style>
+  .jn-footer {
+    margin-top: 64px;
+    background: var(--color-bg-alt, #F4F2EE);
+    color: var(--color-fg, #0F172A);
+    border-top: 3px solid var(--color-accent, #0F766E);
+    font-family: var(--font-body, 'IBM Plex Sans'), system-ui, sans-serif;
+  }
+  .jn-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr; gap: 28px;
+    padding: 40px 16px 16px;
+  }
+  .jn-h {
+    margin: 0 0 12px;
+    font-family: var(--font-utility, 'IBM Plex Mono'), ui-monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--color-muted, #475569); font-weight: 500;
+  }
+  .jn-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  .jn-col a {
+    color: var(--color-fg, #0F172A); font-size: 14px; text-decoration: none;
+  }
+  .jn-col a:hover { color: var(--color-accent, #0F766E); text-decoration: underline; }
+  .jn-disclaimer {
+    max-width: 1200px; margin: 12px auto 0;
+    padding: 16px;
+    display: flex; align-items: flex-start; gap: 12px;
+    border-top: 1px solid var(--color-border, rgba(15,23,42,0.1));
+    border-bottom: 1px solid var(--color-border, rgba(15,23,42,0.1));
+  }
+  .jn-cross { flex-shrink: 0; display: inline-flex; padding-top: 2px; }
+  .jn-disclaimer p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--color-fg, #0F172A); }
+  .jn-disclaimer strong { color: var(--color-accent-dark, #0B5752); }
+  .jn-disclaimer a { color: var(--color-accent, #0F766E); text-decoration: underline; }
+  @media (min-width: 768px) { .jn-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 48px 24px 20px; } .jn-disclaimer { margin-top: 16px; padding: 20px 24px; } }
+  @media (min-width: 1024px) { .jn-grid { padding: 56px 24px 24px; } }
+</style>

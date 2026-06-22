@@ -2,9 +2,11 @@
 /*
  * BaseLayout — Janaushdhi v0.
  * Locked design: bone-white bg, medical-green accent, IBM Plex Sans single family.
- * NO ADS. Public-health surface. All 4 nav surfaces: Header, Footer, Sidebar, BottomBar.
+ * Per-app footer is its OWN component (~/components/Footer.astro) per the
+ * footer-per-app-with-universal-legal decision.
  */
 import '~/styles/tokens.css'
+import Footer from '~/components/Footer.astro'
 
 interface Props {
   title?: string
@@ -88,9 +90,24 @@ const facets = {
     <meta property="og:site_name" content="janaushdhi · oriz" />
     <meta name="theme-color" content="#0F766E" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {import.meta.env.PUBLIC_ADSENSE_CLIENT && (
+      <script
+        is:inline
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.PUBLIC_ADSENSE_CLIENT}`}
+        crossorigin="anonymous"
+      />
+    )}
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
+
+    {/* ── DISCLAIMER BANNER (top of every page) ────────────── */}
+    <div class="med-disclaimer-bar" role="note">
+      <span aria-hidden="true">⚕</span>
+      This site is informational. <strong>Not medical advice.</strong> Consult your doctor.
+      <a href="/disclaimer/">Read more</a>
+    </div>
 
     {/* ── HEADER ───────────────────────────────────────────── */}
     <header class="site-header" role="banner">
@@ -148,48 +165,7 @@ const facets = {
     )}
 
     {/* ── FOOTER ───────────────────────────────────────────── */}
-    <footer class="site-footer" role="contentinfo">
-      <div class="footer-accent" aria-hidden="true"></div>
-      <div class="footer-inner">
-        <div class="footer-col">
-          <p class="footer-h">Browse</p>
-          <ul>
-            <li><a href="/browse/">All medicines</a></li>
-            <li><a href="/savings/">Savings calculator</a></li>
-            <li><a href="/stores/">Find a Kendra</a></li>
-            <li><a href="/find-substitute/">Find substitute</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <p class="footer-h">Resources</p>
-          <ul>
-            <li><a href="https://www.janaushadhi.gov.in/" rel="noopener noreferrer external">janaushadhi.gov.in</a></li>
-            <li><a href="https://pmbjp.gov.in/" rel="noopener noreferrer external">PMBJP scheme</a></li>
-            <li><a href="https://www.india.gov.in/" rel="noopener noreferrer external">india.gov.in</a></li>
-            <li><a href="https://oriz.in/">Oriz family</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <p class="footer-h">Legal</p>
-          <ul>
-            <li><a href="/about/">About</a></li>
-            <li><a href="/privacy/">Privacy</a></li>
-            <li><a href="/terms/">Terms</a></li>
-            <li><a href="/disclaimer/">Disclaimer</a></li>
-            <li><a href="/contact/">Contact</a></li>
-            <li><a href="/refunds/">Refunds</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-fineprint">
-        <p>
-          <strong>No ads. No tracking.</strong> Janaushdhi is a public-health price-intelligence surface.
-          Prices scraped from janaushadhi.gov.in and may lag the official source by up to 24 hours.
-          Talk to a registered pharmacist or doctor before substituting any medication.
-        </p>
-        <p class="mono">© 2026 oriz · MIT licensed · <a href="https://github.com/chirag127/oriz-janaushdhi-app">source on github</a></p>
-      </div>
-    </footer>
+    <Footer />
 
     {/* ── BOTTOM BAR (mobile) ──────────────────────────────── */}
     <nav class="bottombar" aria-label="Mobile primary">
@@ -202,6 +178,18 @@ const facets = {
     </nav>
 
     <style is:inline>
+      /* ── Medical disclaimer top bar ── */
+      .med-disclaimer-bar {
+        background: #0F766E; color: #fff;
+        padding: 8px 16px;
+        text-align: center;
+        font-size: 0.8rem; line-height: 1.4;
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      }
+      .med-disclaimer-bar strong { font-weight: 600; }
+      .med-disclaimer-bar a { color: #fff; text-decoration: underline; margin-left: 6px; }
+      .med-disclaimer-bar span { margin-right: 6px; }
+
       /* ── Header ── */
       .site-header {
         position: sticky; top: 0; z-index: 50;
